@@ -8,10 +8,11 @@ print(df)
 #country code = iso_a3
 
 country_code = 'RUS'
-
+print('HEREEE')
 query_text = f"(iso_a3 == '{country_code}')"
 
 print(len(df))
+print('THISSS')
 
 sub_df = df.query(query_text)
 
