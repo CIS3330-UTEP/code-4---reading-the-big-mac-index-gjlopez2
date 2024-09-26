@@ -42,17 +42,51 @@ def get_the_cheapest_big_mac_price_by_year(year):
     query_text = f"(date >='{year}-01-01' and  date <='{year}-12-31')"
     #query_text2 = f"(date == '{year}'')"
     sub_df1 = big_mac_file.query(query_text)
+    sub_df2 = big_mac_file.query(query_text)
+    sub_df3 = big_mac_file.query(query_text)
+    sub_df4 = big_mac_file.query(query_text)
 
-    sub_df1 = sub_df1['dollar_price'].min()
+    sub_df1 = sub_df1['dollar_price'].idxmin()
+    this = sub_df2.loc[sub_df1, 'name']
+
+    cc = sub_df3.loc[sub_df1, 'iso_a3']
+
+    minval = sub_df4['dollar_price'].min()
+    rounded = round(minval, 2)
+
+    final = f"{this}({cc}): ${rounded}"
 
     #print(type(sub_df1))
 
-    rounded = round(sub_df1, 2)
+    #rounded = round(sub_df1, 2)
 
-    return rounded
+
+    return final
 
 def get_the_most_expensive_big_mac_price_by_year(year):
-    pass # Remove this line and code your function
+    query_text = f"(date >='{year}-01-01' and  date <='{year}-12-31')"
+    #query_text2 = f"(date == '{year}'')"
+    sub_df1 = big_mac_file.query(query_text)
+    sub_df2 = big_mac_file.query(query_text)
+    sub_df3 = big_mac_file.query(query_text)
+    sub_df4 = big_mac_file.query(query_text)
+
+    sub_df1 = sub_df1['dollar_price'].idxmax()
+    this = sub_df2.loc[sub_df1, 'name']
+
+    cc = sub_df3.loc[sub_df1, 'iso_a3']
+
+    minval = sub_df4['dollar_price'].max()
+    rounded = round(minval, 2)
+
+    final = f"{this}({cc}): ${rounded}"
+
+    #print(type(sub_df1))
+
+    #rounded = round(sub_df1, 2)
+
+
+    return final
 
 if __name__ == "__main__":
     result_a = get_big_mac_price_by_year(2012,'arg')
@@ -61,3 +95,5 @@ if __name__ == "__main__":
     print(result_b)
     result_c = get_the_cheapest_big_mac_price_by_year(2012)
     print(result_c)
+    result_d = get_the_most_expensive_big_mac_price_by_year(2014)
+    print(result_d)
